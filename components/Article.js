@@ -85,6 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'New Article',
+    date: 'Jan 1st, 2020',
+    firstParagraph: `She suspicion dejection saw instantly. Well deny may real one told yet saw hard dear. Bed chief house rapid right the. Set noisy one state tears which. No girl oh part must fact high my he. Simplicity in excellence melancholy as remarkably discovered. Own partiality motionless was old excellence she inquietude contrasted. Sister giving so wicket cousin of an he rather marked. Of on game part body rich. Adapted mr savings venture it or comfort affixed friends.  `,
+
+    secondParagraph: `From they fine john he give of rich he. They age and draw mrs like. Improving end distrusts may instantly was household applauded incommode. Why kept very ever home mrs. Considered sympathize ten uncommonly occasional assistance sufficient not. Letter of on become he tended active enable to. Vicinity relation sensible sociable surprise screened no up as. `,
+
+    thirdParagraph: `Not far stuff she think the jokes. Going as by do known noise he wrote round leave. Warmly put branch people narrow see. Winding its waiting yet parlors married own feeling. Marry fruit do spite jokes an times. Whether at it unknown warrant herself winding if. Him same none name sake had post love. An busy feel form hand am up help. Parties it brother amongst an fortune of. Twenty behind wicket why age now itself ten. `
   }
 ];
 
@@ -111,3 +120,48 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+function articleMaker(dataSet){
+  // Creating elements
+  const container = document.createElement('div');
+  const header = document.createElement('h2');
+  const paragraphDate = document.createElement('p');
+  const paragraphOne = document.createElement('p');
+  const paragraphTwo = document.createElement('p');
+  const paragraphThree = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  // Adding classes
+  container.classList.add('article');
+  paragraphDate.classList.add('date')
+  expandButton.classList.add('expandButton')
+
+  // Adding content through dataset
+  header.textContent = dataSet.title;
+  paragraphDate.textContent = dataSet.date;
+  paragraphOne.textContent = dataSet.firstParagraph;
+  paragraphTwo.textContent = dataSet.secondParagraph;
+  paragraphThree.textContent = dataSet.thirdParagraph;
+  expandButton.textContent = '+'
+
+  // Adding event listener
+  expandButton.addEventListener('click', () => {
+    container.classList.toggle('article-open')
+  });
+
+  // Appending everything to container
+  const article = [ header, paragraphDate, paragraphOne, paragraphTwo, paragraphThree, expandButton];
+  article.forEach((item) => {
+    container.appendChild(item);
+  });
+
+  // Return container
+  return container;
+}
+
+// iterate through data and append new article to articles div
+const articles = document.querySelector(".articles");
+data.forEach( (item) =>{
+  let newArticle = articleMaker(item);
+  articles.appendChild(newArticle);
+});
+
